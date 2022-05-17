@@ -14,27 +14,27 @@ animate();
 
 function init() {
 
-    container = document.createElement( 'div' );
-    document.body.appendChild( container );
+    container = document.createElement('div');
+    document.body.appendChild(container);
 
-    camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 15 );
-    camera.position.set( 10, 0.1, 10 );
+    camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 35);
+    camera.position.set(3, 0.15, 3);
 
-    cameraTarget = new THREE.Vector3( 10, 1, 0 );
+    cameraTarget = new THREE.Vector3(0, - 0.25, 0);//Camara
 
     scene = new THREE.Scene();
-    scene.background = new THREE.Color( 'grey' );
-    scene.fog = new THREE.Fog( 0x72645b, 2, 15 );
+    scene.background = new THREE.Color('grey');
+    scene.fog = new THREE.Fog('orange', 2, 15);
 
     // Ground
 
     const plane = new THREE.Mesh(
-        new THREE.PlaneGeometry( 40, 40 ),
-        new THREE.MeshPhongMaterial( { color: 0x999999, specular: 0x101010 } )
+        new THREE.PlaneGeometry(50, 50),
+        new THREE.MeshPhongMaterial({ color: 'red', specular: 'write' })
     );
     plane.rotation.x = - Math.PI / 2;
     plane.position.y = - 0.5;
-    scene.add( plane );
+    scene.add(plane);
 
     plane.receiveShadow = true;
 
@@ -42,21 +42,21 @@ function init() {
     // ASCII file
 
     const loader = new STLLoader();
-    loader.load( './src/modelos/wiprobotito.stl', function ( geometry ) {
+    loader.load('./src/modelos/wiprobotito.stl', function (geometry) {
 
-        const material = new THREE.MeshPhongMaterial( { color: 'orange', specular: 0x111111, shininess: 200 } );
-        const mesh = new THREE.Mesh( geometry, material );
+        const material = new THREE.MeshPhongMaterial({ color: 'green', specular: 'blue', shininess: 200 });
+        const mesh = new THREE.Mesh(geometry, material);
 
-        mesh.position.set( 5, 0.2, 0.12 ); 
-        mesh.rotation.set( 4.7, 0, -2 ); //rotacion de la figura
-        mesh.scale.set( 0.01,0.01,0.01); //tamaño del robot
+        mesh.position.set(0, - 0.25, 0.6);
+        mesh.rotation.set(4.7, 0, -2);//Rotar mono
+        mesh.scale.set(0.03, 0.03, 0.03);//Tamaño del mono
 
         mesh.castShadow = true;
         mesh.receiveShadow = true;
 
-        scene.add( mesh );
+        scene.add(mesh);
 
-    } );
+    });
 
 /* 
 
